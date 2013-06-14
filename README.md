@@ -10,4 +10,5 @@ rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/haml-rai
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/strong_parameters.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/newrelic_rpm.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/timecop.rb
+rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/fabrication.rb
 ````
