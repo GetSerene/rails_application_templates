@@ -1,9 +1,4 @@
 # haml
-gem 'haml-rails', '>= 0.3.4', :group => :development
-require 'bundler'
-Bundler.with_clean_env do
-  run 'bundle install'
-end
+require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
 
-git add: "."
-git commit: %Q{ -m 'install haml' }
+gem_install_bundle_and_commit 'haml-rails', '>= 0.3.4', :group => :development

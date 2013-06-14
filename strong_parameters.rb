@@ -1,11 +1,7 @@
 # strong_parameters
-gem 'strong_parameters'
-require 'bundler'
-Bundler.with_clean_env do
-  run 'bundle install'
-end
-git add: "."
-git commit: %Q{ -m 'install strong_parameters' }
+require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
+
+gem_install_bundle_and_commit 'strong_parameters'
 
 
 initializer 'strong_parameters.rb', 'ActiveRecord::Base.send(:include, ActiveModel::ForbiddenAttributesProtection)'

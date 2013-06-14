@@ -1,13 +1,7 @@
 # postgresql
-gem 'pg'
+require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
 
-require 'bundler'
-Bundler.with_clean_env do
-  run 'bundle install'
-end
-
-git add: "."
-git commit: %Q{ -m 'install pg' }
+gem_install_bundle_and_commit 'pg'
 
 remove_file 'config/database.yml'
 create_file 'config/database.yml', <<-CONFIG

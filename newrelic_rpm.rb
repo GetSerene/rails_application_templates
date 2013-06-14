@@ -1,8 +1,3 @@
-gem 'newrelic_rpm'
-require 'bundler'
-Bundler.with_clean_env do
-  run 'bundle install'
-end
+require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
 
-git add: "."
-git commit: %Q{ -m 'install newrelic_rpm' }
+gem_install_bundle_and_commit 'newrelic_rpm'

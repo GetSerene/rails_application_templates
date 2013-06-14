@@ -1,12 +1,7 @@
 # rspec-rails
-gem 'rspec-rails', '~> 2.0', :group => [:development, :test]
-require 'bundler'
-Bundler.with_clean_env do
-  run 'bundle install'
-end
+require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
 
-git add: "."
-git commit: %Q{ -m 'install rspec-rails' }
+gem_install_bundle_and_commit 'rspec-rails', '~> 2.0', :group => [:development, :test]
 
 generate 'rspec:install'
 git add: "."
