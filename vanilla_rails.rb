@@ -1,5 +1,4 @@
 # vanilla rails
-git :init
 git add: "."
 git commit: %Q{ -m 'Vanilla rails' }
 
