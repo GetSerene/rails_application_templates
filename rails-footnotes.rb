@@ -5,4 +5,4 @@ gem_install_bundle_and_commit 'rails-footnotes', '>= 3.7.9', :group => :developm
 generate 'rails_footnotes:install'
 git add: '.rails_footnotes'
 git add: 'config/initializers/rails_footnotes.rb'
-git commit: %Q{ -m 'rake generate rails_footnotes:install' }
+git commit: %Q{ -m 'rails generate rails_footnotes:install' }
