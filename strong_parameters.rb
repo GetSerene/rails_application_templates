@@ -1,6 +1,9 @@
 # strong_parameters
 gem 'strong_parameters'
-run 'bundle install'
+require 'bundler'
+Bundler.with_clean_env do
+  run 'bundle install'
+end
 git add: "."
 git commit: %Q{ -m 'install strong_parameters' }
 
