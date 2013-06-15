@@ -20,9 +20,12 @@ test:
   pool: 5
   username: #{`whoami`}
   password:
+  min_messages: WARNING
 CONFIG
 
 git add: "."
 git commit: %Q{ -m 'create default database.yml for pg' }
 
 run 'rake db:create:all'
+
+gem_install_bundle_and_commit 'silent-postgres'
