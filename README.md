@@ -13,5 +13,6 @@ rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/timecop.
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/fabrication.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/rails-footnotes.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/debugger.rb
+rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/ruby-version-in-gemfile.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/devise-for-user.rb
 ````
