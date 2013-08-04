@@ -1,6 +1,6 @@
 Here is a decent recipe:
 ````
-rails new PROJECTNAME --skip-bundle
+rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/ruby-version_and_gemset.rb; cd ..; cd -
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/vanilla_rails.rb
