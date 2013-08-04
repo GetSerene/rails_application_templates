@@ -15,5 +15,6 @@ rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/rails-fo
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/debugger.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/ruby-version-in-gemfile.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/unicorn.rb
+rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/procfile.rb
 rake rails:template LOCATION=~/Code/Trust40/rails_application_templates/devise-for-user.rb
 ````
