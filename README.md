@@ -1,3 +1,9 @@
+### Prerequisites
+- postgres
+-- should be running
+-- psql from the commandline should just work (using your username from whoami)
+-- otherwise you'll have to update the pg recipe to have the correct username and password for your postgres
+
 Here is a decent recipe:
 ````
 rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
