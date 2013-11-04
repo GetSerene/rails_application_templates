@@ -6,6 +6,11 @@
 
 Here is a decent recipe:
 ````
+mkdir -p ~/Code/SereneMachine
+cd ~/Code/SereneMachine
+git clone https://github.com/SereneMachine/rails_application_templates.git # or if you've forked the rails_application_templates repo ... the url of your fork
+rails -v # should return Rails 4.0.x ... although this recipe works for rails 3.2.x as well (just be sure to use the strong_paramaters step)
+ruby -v  # should return ruby 2.0.x ... although this recipe works for ruby 1.9.3 as well
 rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/ruby-version_and_gemset.rb; cd ..; cd -
