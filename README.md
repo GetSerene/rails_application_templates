@@ -13,7 +13,8 @@ rails -v # should return Rails 4.0.x ... although this recipe works for rails 3.
 ruby -v  # should return ruby 2.0.x ... although this recipe works for ruby 1.9.3 as well
 rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
-rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/ruby-version_and_gemset.rb; cd ..; cd -
+rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/ruby-version_and_gemset.rb;
+cd ..; cd - # you are using rbenv or rvm right?
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/vanilla_rails.rb
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/pg.rb
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/rspec-rails.rb
