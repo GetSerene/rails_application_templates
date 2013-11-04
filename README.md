@@ -15,6 +15,7 @@ rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/ruby-version_and_gemset.rb;
 cd ..; cd - # you are using rbenv or rvm right?
+bundle install
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/vanilla_rails.rb
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/pg.rb
 rake rails:template LOCATION=~/Code/SereneMachine/rails_application_templates/rspec-rails.rb
