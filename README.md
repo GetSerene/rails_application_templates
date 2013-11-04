@@ -1,10 +1,10 @@
 ### Prerequisites
-- postgres
--- should be running
--- psql from the commandline should just work (using your username from whoami)
--- otherwise you'll have to update the pg recipe to have the correct username and password for your postgres
+* postgres
+  * should be running
+  * psql from the commandline should just work (using your username from whoami)
+  * otherwise you'll have to update the pg recipe to have the correct username and password for your postgres
 
-Here is a decent recipe:
+Here is a recipe we use when starting a new SereneMachine project:
 ````
 mkdir -p ~/Code/SereneMachine
 cd ~/Code/SereneMachine
