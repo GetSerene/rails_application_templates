@@ -1,4 +1,7 @@
 ### Prerequisites
+* git
+* ruby 4.0.x (preferably via rbenv or rvim)
+* rails 2.0.x
 * postgres
   * should be running
   * psql from the commandline should just work (using your username from whoami)
