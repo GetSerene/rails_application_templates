@@ -34,4 +34,5 @@ rake rails:template LOCATION=~/Code/GetSerene/rails_application_templates/unicor
 rake rails:template LOCATION=~/Code/GetSerene/rails_application_templates/procfile.rb
 rake rails:template LOCATION=~/Code/GetSerene/rails_application_templates/heroku.rb
 rake rails:template LOCATION=~/Code/GetSerene/rails_application_templates/devise-for-user.rb
+rake rails:template LOCATION=~/Code/GetSerene/rails_application_templates/bootstrap-sass.rb
 ````
