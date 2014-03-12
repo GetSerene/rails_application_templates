@@ -1,6 +1,6 @@
 require File.expand_path('../gem_install_bundle_and_commit', __FILE__)
 
-gem_install_bundle_and_commit 'devise', :github => 'SereneMachine/devise'
+gem_install_bundle_and_commit 'devise', :github => 'GetSerene/devise'
 
 generate 'devise:install'
 git add: 'config/initializers/devise.rb'
