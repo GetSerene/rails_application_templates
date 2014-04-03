@@ -11,10 +11,10 @@ def sort_and_save_gemfile(make_backup=false)
     puts "cp Gemfile #{backup_gemfile_name}"
     FileUtils.cp("Gemfile", backup_gemfile_name)
   end
-  lines = IO.read('Gemfile')
+  lines = IO.readlines('Gemfile')
   newlines = gemfile_sort(lines)
   File.open('Gemfile', 'w') do |f|
-    f.write newlines.join("\n")
+    f.write newlines.collect{|line| (line.match /\n$/) ? line : "#{line}\n"}.join("")
   end
 end
 
