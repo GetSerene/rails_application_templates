@@ -10,7 +10,7 @@ development:
   encoding: unicode
   database: #{app_name}_development
   pool: 5
-  username: #{`whoami`}
+  username: <%= `whoami` %>
   password:
 
 test:
@@ -18,7 +18,7 @@ test:
   encoding: unicode
   database: #{app_name}_test
   pool: 5
-  username: #{`whoami`}
+  username: <%= `whoami` %>
   password:
   min_messages: WARNING
 CONFIG
