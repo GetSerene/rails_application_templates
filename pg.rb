@@ -3,8 +3,8 @@ require File.expand_path('../lib/gem_install_bundle_and_commit', __FILE__)
 
 gem_install_bundle_and_commit 'pg'
 
-remove_file 'config/database.yml'
-create_file 'config/database.yml', <<-CONFIG
+remove_file 'config/database.default.yml'
+create_file 'config/database.default.yml', <<-CONFIG
 development:
   adapter: postgresql
   encoding: unicode
@@ -24,8 +24,22 @@ test:
 CONFIG
 
 git add: "."
-git commit: %Q{ -m 'create default database.yml for pg' }
+git rm: "config/database.yml"
+git commit: %Q{ -m 'rm database.yml, create database.default.yml for pg' }
 
-run 'rake db:create:all'
+unless IO.read('.gitignore').match /database.yml/
+  append_file '.gitignore', 'config/database.yml'
+  git add: "."
+  git commit: %Q{ -m 'ignore database.yml' }
+end
 
 gem_install_bundle_and_commit 'silent-postgres'
+
+if yes? 'link database.yml to database.default.yml?'
+
+  `ln -fs database.default.yml config/database.yml`
+
+  if yes? 'create all the databases?'
+    run 'rake db:create:all'
+  end
+end
