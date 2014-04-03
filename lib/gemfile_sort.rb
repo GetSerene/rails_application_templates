@@ -18,7 +18,7 @@ def sort_and_save_gemfile(make_backup=false)
   end
 end
 
-def gemfile_sort(lines)
+def gemfile_sort(lines, keep_first = ['dotenv-rails'])
   output_lines = []
   gems_to_sort = []
   new_lines = lines.dup
@@ -28,6 +28,11 @@ def gemfile_sort(lines)
     when /^#/
       stored_context << line
     when /^gem/
+      if keep_first.find_index {|keeper| line.include? keeper}
+        output_lines += stored_context + [line]
+        stored_context = []
+        next
+      end
       sort_key = line.gsub(/['"]/, '') # remove the quotation marks because we don't want them to count
       gems_to_sort << [sort_key, stored_context + [line]]
       stored_context = []

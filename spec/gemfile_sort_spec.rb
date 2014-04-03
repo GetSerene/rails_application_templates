@@ -26,5 +26,11 @@ describe "gemfile_sort" do
     it "leaves comments that come right before gems before the gem" do
       expect(gemfile_sort ["# pry is great", "gem pry", "# I love rails!", "gem rails"])
     end
+
+    it "leaves dotenv-rails in the first position" do
+      lines_to_sort = ["# gotta initialize the environment first", "gem 'dotenv-rails'", 'gem "pry"', "gem 'debugger'"]
+      sorted_lines  = ["# gotta initialize the environment first", "gem 'dotenv-rails'", "gem 'debugger'", 'gem "pry"']
+      expect(gemfile_sort lines_to_sort).to eql(sorted_lines)
+    end
   end
 end
