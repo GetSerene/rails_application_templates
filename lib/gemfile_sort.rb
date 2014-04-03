@@ -28,7 +28,7 @@ def gemfile_sort(lines)
     when /^#/
       stored_context << line
     when /^gem/
-      sort_key = line.gsub(/'"/, '') # remove the quotation marks because we don't want them to count
+      sort_key = line.gsub(/['"]/, '') # remove the quotation marks because we don't want them to count
       gems_to_sort << [sort_key, stored_context + [line]]
       stored_context = []
     else

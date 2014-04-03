@@ -13,7 +13,7 @@ describe "gemfile_sort" do
     end
 
     it "ignores the quotation marks when sorting, but preserves them in the output" do
-      expect(gemfile_sort ["gem rails", 'gem pry', "gem debugger"]).to eql(["gem debugger", 'gem pry', "gem rails"])
+      expect(gemfile_sort ["gem 'rails'", 'gem "pry"', "gem 'debugger'"]).to eql(["gem 'debugger'", 'gem "pry"', "gem 'rails'"])
     end
 
     it "doesn't change the original source lines array" do
