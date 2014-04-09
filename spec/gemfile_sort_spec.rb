@@ -12,18 +12,22 @@ describe "gemfile_sort" do
       "source 'https://rubygems.org\n",
       "Ruby 2.1.1\n",
       "\n",
-      "# gem rails"
+      "# gem rails\n"
     ]
     expect(gemfile_sort gemless_lines.dup).to eql(gemless_lines)
   end
 
+  it "ensures the file ends with a newline" do
+    expect(gemfile_sort ["gem rails"]).to eql(["gem rails\n"])
+  end
+
   describe "with at least some gem commands" do
     it "sorts gem commands" do
-      expect(gemfile_sort ["gem rails", "gem pry"]).to eql(["gem pry", "gem rails"])
+      expect(gemfile_sort ["gem rails", "gem pry"]).to eql(["gem pry\n", "gem rails\n"])
     end
 
     it "ignores the quotation marks when sorting, but preserves them in the output" do
-      expect(gemfile_sort ["gem 'rails'", 'gem "pry"', "gem 'debugger'"]).to eql(["gem 'debugger'", 'gem "pry"', "gem 'rails'"])
+      expect(gemfile_sort ["gem 'rails'", 'gem "pry"', "gem 'debugger'"]).to eql(["gem 'debugger'\n", "gem \"pry\"\n", "gem 'rails'\n"])
     end
 
     it "doesn't change the original source lines array" do
@@ -38,17 +42,17 @@ describe "gemfile_sort" do
     end
 
     it "leaves dotenv-rails in the first position" do
-      lines_to_sort = ["# gotta initialize the environment first", "gem 'dotenv-rails'", 'gem "pry"', "gem 'debugger'"]
-      sorted_lines  = ["# gotta initialize the environment first", "gem 'dotenv-rails'", "gem 'debugger'", 'gem "pry"']
+      lines_to_sort = ["# gotta initialize the environment first\n", "gem 'dotenv-rails'\n", 'gem "pry"', "gem 'debugger'\n"]
+      sorted_lines  = ["# gotta initialize the environment first\n", "gem 'dotenv-rails'\n", "gem 'debugger'\n", "gem \"pry\"\n"]
       expect(gemfile_sort lines_to_sort).to eql(sorted_lines)
     end
 
     it "removes duplicate gems" do
-      expect(gemfile_sort ["gem rails", "gem rails"]).to eq ["gem rails"]
+      expect(gemfile_sort ["gem rails", "gem rails"]).to eq ["gem rails\n"]
     end
 
     it "never leaves more than two consecutive lines of whitespace" do
-      expect(gemfile_sort ["# comment", "", "", "", "gem pry"]).to eq ["# comment", "", "", "gem pry"]
+      expect(gemfile_sort ["# comment", "", "", "", "gem pry"]).to eq ["# comment\n", "\n", "\n", "gem pry\n"]
     end
   end
 end

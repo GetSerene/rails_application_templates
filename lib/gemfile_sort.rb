@@ -78,7 +78,7 @@ end
 def gemfile_sort(lines, keep_first = ['dotenv-rails'])
   output_lines = []
   gems_to_sort = []
-  new_lines = lines.dup
+  new_lines = lines.dup.collect {|line| line =~ /\n$/m ? line : "#{line}\n"}
   stored_context = []
   expand_groups(new_lines).each do |line|
     case line
