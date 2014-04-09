@@ -32,5 +32,9 @@ describe "gemfile_sort" do
       sorted_lines  = ["# gotta initialize the environment first", "gem 'dotenv-rails'", "gem 'debugger'", 'gem "pry"']
       expect(gemfile_sort lines_to_sort).to eql(sorted_lines)
     end
+
+    it "removes duplicate gems" do
+      expect(gemfile_sort ["gem rails", "gem rails"]).to eq ["gem rails"]
+    end
   end
 end

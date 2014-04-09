@@ -45,8 +45,8 @@ def gemfile_sort(lines, keep_first = ['dotenv-rails'])
       stored_context = []
     end
   end
-  gems_to_sort.sort.each do |gem_lines|
   output_lines += stored_context unless stored_context.empty?
+  gems_to_sort.sort.uniq.each do |gem_lines|
     sort_key, lines_to_add = gem_lines
     output_lines += lines_to_add
   end
