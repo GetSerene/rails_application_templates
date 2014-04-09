@@ -36,12 +36,51 @@ def remove_excessive_whitespace(lines)
   end
 end
 
+def add_group_hash_to_line(line, groups_hash)
+  result = "#{line}, #{groups_hash}"
+  if result =~ /\n/
+    result.gsub! "\n", ""
+    result = "#{result}\n"
+  end
+  result
+end
+
+def expand_groups(lines)
+  output_lines = []
+  groups_hash = false
+  lines.each do |line|
+    line = line.gsub /^\s+/, ""
+    if groups_hash
+      line = case line
+      when /^gem/
+        add_group_hash_to_line(line, groups_hash)
+      when /^end/
+        groups_hash = false
+        false
+      else
+        line
+      end
+    else
+      line = case line
+      when /^group \s*(.*)\s*do/
+        groups = $1.split(",").collect(&:strip)
+        groups_hash = (groups.length > 1) ? ":groups => [ #{groups.join ", "} ]" : ":group => #{groups.first}"
+        false
+      else
+        line
+      end
+    end
+    output_lines << line if line
+  end
+  output_lines
+end
+
 def gemfile_sort(lines, keep_first = ['dotenv-rails'])
   output_lines = []
   gems_to_sort = []
   new_lines = lines.dup
   stored_context = []
-  new_lines.each do |line|
+  expand_groups(new_lines).each do |line|
     case line
     when /^#/
       stored_context << line

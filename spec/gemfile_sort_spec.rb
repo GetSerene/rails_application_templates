@@ -56,3 +56,58 @@ describe "remove_excessive_whitespace" do
     expect(remove_excessive_whitespace ["\n", "\n", "\n", "\n", "\n", "\n", "\n", "\n"]).to eq ["\n", "\n"]
   end
 end
+
+describe "add_group_hash_to_line" do
+  it "leaves a newline on the end of the line" do
+    expect( add_group_hash_to_line "gem 'pry'\n", ":group => :development" ).to eq("gem 'pry', :group => :development\n")
+  end
+
+  it "doesn't insert a newline on the end of a line that doesn't already have one" do
+    expect( add_group_hash_to_line "gem 'pry'", ":group => :development" ).to eq("gem 'pry', :group => :development")
+  end
+end
+
+describe "expand_groups" do
+  describe "for a group of gems having a single symbol as their context" do
+    let(:grouped_lines) do
+      [ "group :doc do\n",
+        "  # bundle exec rake doc:rails generates the API under doc/api.\n",
+        "  gem 'sdoc', require: false\n",
+        "end"
+      ]
+    end
+
+    it "strips leading whitespace from every line" do
+      lines_that_start_with_whitespace = expand_groups(grouped_lines).select {|line| line =~ /^\s/}
+      expect( lines_that_start_with_whitespace ).to be_empty
+    end
+
+    it "uses :group => symbol" do
+      expect( expand_groups(grouped_lines).join ).to include(":group => :doc")
+    end
+
+    it "preserves context comments" do
+      expect( expand_groups(grouped_lines) ).to include("# bundle exec rake doc:rails generates the API under doc/api.\n")
+    end
+
+    it "removes the group do ... end block" do
+      expanded_and_joined = expand_groups(grouped_lines).join
+      expect( expanded_and_joined ).not_to include("group :doc do")
+      expect( expanded_and_joined ).not_to include("end")
+    end
+  end
+
+  it "preserves a list of groups with each gem" do
+    grouped_lines = [
+      "group :development, :test do",
+      "  gem 'rspec-rails', '~> 2.0'",
+      "  gem 'quiet_assets'",
+      "end"
+    ]
+    expanded_lines = [
+      "gem 'rspec-rails', '~> 2.0', :groups => [ :development, :test ]",
+      "gem 'quiet_assets', :groups => [ :development, :test ]"
+    ]
+    expect( expand_groups grouped_lines ).to eq expanded_lines
+  end
+end
