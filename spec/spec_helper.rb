@@ -3,7 +3,7 @@ puts $LOAD_PATH.inspect
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[File.join(File.expand_path('..', __FILE__), "spec/support/**/*.rb")].each { |f| require f }
+Dir[File.join(File.expand_path('../..', __FILE__), "spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   # Run specs in random order to surface order dependencies. If you find an
