@@ -22,6 +22,20 @@ def sort_and_save_gemfile(option_overrides = {})
   end
 end
 
+def remove_excessive_whitespace(lines)
+  consecutive_whitespace = 0
+  lines.reject do |line|
+    if line !~ /^\s*$/
+      consecutive_whitespace = 0
+      false
+    elsif (consecutive_whitespace += 1) > 2
+      true
+    else
+      false
+    end
+  end
+end
+
 def gemfile_sort(lines, keep_first = ['dotenv-rails'])
   output_lines = []
   gems_to_sort = []
@@ -50,5 +64,5 @@ def gemfile_sort(lines, keep_first = ['dotenv-rails'])
     sort_key, lines_to_add = gem_lines
     output_lines += lines_to_add
   end
-  output_lines.flatten
+  remove_excessive_whitespace output_lines.flatten
 end

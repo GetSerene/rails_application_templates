@@ -36,5 +36,23 @@ describe "gemfile_sort" do
     it "removes duplicate gems" do
       expect(gemfile_sort ["gem rails", "gem rails"]).to eq ["gem rails"]
     end
+
+    it "never leaves more than two consecutive lines of whitespace" do
+      expect(gemfile_sort ["# comment", "", "", "", "gem pry"]).to eq ["# comment", "", "", "gem pry"]
+    end
+  end
+end
+
+describe "remove_excessive_whitespace" do
+  it "leaves two empty lines intact" do
+    expect(remove_excessive_whitespace ["\n", "\n"]).to eq ["\n", "\n"]
+  end
+
+  it "turns three empty lines into two" do
+    expect(remove_excessive_whitespace ["\n", "\n", "\n"]).to eq ["\n", "\n"]
+  end
+
+  it "turns many empty lines into two" do
+    expect(remove_excessive_whitespace ["\n", "\n", "\n", "\n", "\n", "\n", "\n", "\n"]).to eq ["\n", "\n"]
   end
 end
