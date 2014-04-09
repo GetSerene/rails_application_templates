@@ -121,3 +121,85 @@ describe "expand_groups" do
     expect( expand_groups grouped_lines ).to eq expanded_lines
   end
 end
+
+describe "sort_and_save_gemfile" do
+  include UsesTempFiles
+
+  describe "with a complicated Gemfile" do
+    in_directory_with_file('Gemfile')
+
+    it "sorts intelligently" do
+      content_for_file <<-GEMFILE_EOF
+source 'https://rubygems.org'
+ruby '2.1.1'
+
+# needs to come first to setup ENV for gems that depend upon it
+gem 'dotenv-rails'
+
+gem 'rails', '4.0.2'
+gem 'sqlite3'
+
+gem 'sass-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'annotate'
+gem 'pry-rails'
+gem 'faker'
+gem 'resque'
+gem 'resque-web', require: 'resque_web'
+
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'quiet_assets'
+end
+    GEMFILE_EOF
+
+    sort_and_save_gemfile
+    expect(content_from_file).to eq <<-GEMFILE_EOF
+source 'https://rubygems.org'
+ruby '2.1.1'
+
+# needs to come first to setup ENV for gems that depend upon it
+gem 'dotenv-rails'
+
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'annotate'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'faker'
+gem 'jbuilder', '~> 1.2'
+gem 'jquery-rails'
+gem 'pry-rails'
+gem 'quiet_assets', :groups => [ :development, :test ]
+gem 'rails', '4.0.2'
+gem 'resque'
+gem 'resque-web', require: 'resque_web'
+gem 'rspec-rails', '~> 2.0', :groups => [ :development, :test ]
+gem 'sass-rails', '~> 4.0.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', require: false, :group => :doc
+gem 'sqlite3'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
+    GEMFILE_EOF
+    end
+  end
+end
