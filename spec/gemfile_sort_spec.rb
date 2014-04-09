@@ -2,9 +2,19 @@ require File.expand_path('../spec_helper', __FILE__)
 require 'gemfile_sort'
 
 describe "gemfile_sort" do
-  let(:gemless_lines) {["source 'https://rubygems.org", "Ruby 2.1.1", "", "# gem rails"]}
+  it "doesn't remove empty lines" do
+    two_blank_lines = ["\n", "\n"]
+    expect(gemfile_sort two_blank_lines.dup).to eql(two_blank_lines)
+  end
+
   it "doesn't change a file with no gem commands" do
-    expect(gemfile_sort gemless_lines).to eql(gemless_lines)
+    gemless_lines = [
+      "source 'https://rubygems.org\n",
+      "Ruby 2.1.1\n",
+      "\n",
+      "# gem rails"
+    ]
+    expect(gemfile_sort gemless_lines.dup).to eql(gemless_lines)
   end
 
   describe "with at least some gem commands" do

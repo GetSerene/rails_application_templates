@@ -49,7 +49,7 @@ def expand_groups(lines)
   output_lines = []
   groups_hash = false
   lines.each do |line|
-    line = line.gsub /^\s+/, ""
+    line = line.gsub /^\s+(\S)/, '\1'
     if groups_hash
       line = case line
       when /^gem/
