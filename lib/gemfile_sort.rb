@@ -1,20 +1,24 @@
 require 'fileutils'
 
-def sort_and_save_gemfile(make_backup=false)
-  unless File.exist?("Gemfile")
-    puts "#{__FILE__}:#{__LINE__} #{__method__} Gemfile doesn't exist!"
+def sort_and_save_gemfile(option_overrides = {})
+  options = {
+    make_backup: false,
+    gemfile_name: 'Gemfile'
+  }.merge(option_overrides)
+  unless File.exist?(options[:gemfile_name])
+    puts "#{__FILE__}:#{__LINE__} #{__method__} #{options[:gemfile_name]} doesn't exist!"
     exit -1
   end
 
-  if make_backup
-    backup_gemfile_name = "Gemfile-#{Time.now.strftime("%Y-%m-%d-%H:%M:%S-%Z")}"
-    puts "cp Gemfile #{backup_gemfile_name}"
-    FileUtils.cp("Gemfile", backup_gemfile_name)
+  if options[:make_backup]
+    backup_gemfile_name = "#{options[:gemfile_name]}-#{Time.now.strftime("%Y-%m-%d-%H:%M:%S-%Z")}"
+    puts "cp #{options[:gemfile_name]} #{backup_gemfile_name}"
+    FileUtils.cp("#{options[:gemfile_name]}", backup_gemfile_name)
   end
-  lines = IO.readlines('Gemfile')
+  lines = IO.readlines(options[:gemfile_name])
   newlines = gemfile_sort(lines)
-  File.open('Gemfile', 'w') do |f|
-    f.write newlines.collect{|line| (line.match /\n$/) ? line : "#{line}\n"}.join("")
+  File.open(options[:gemfile_name], 'w') do |f|
+    f.write newlines.join("")
   end
 end
 
