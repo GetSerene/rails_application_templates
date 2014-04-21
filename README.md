@@ -62,5 +62,6 @@ rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/byebug.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/unicorn.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/procfile.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/heroku.rb"
+rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/decent_exposure.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/devise-for-user.rb" # probably want to replace this with the id OAUTH provisioner and token authentication
 ````
