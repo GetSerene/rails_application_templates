@@ -1,7 +1,6 @@
 require File.expand_path('../lib/gem_install_bundle_and_commit', __FILE__)
 
-gem_install_bundle_and_commit 'devise'
-
+gem_install_bundle_and_commit 'devise', git: 'https://github.com/plataformatec/devise.git', :branch => 'lm-rails-4-2'
 generate 'devise:install'
 git add: 'config/initializers/devise.rb'
 git add: 'config/locales/devise.en.yml'
