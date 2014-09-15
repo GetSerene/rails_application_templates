@@ -2,7 +2,7 @@ require File.expand_path('../lib/gem_install_bundle_and_commit', __FILE__)
 
 gem_install_bundle_and_commit 'bootstrap-sass'
 
-gem_install_bundle_and_commit 'rails_layout', group: :development
+gem_install_bundle_and_commit 'rails_layout', groups: [:development]
 
 generate 'layout:install bootstrap3'
 git rm:  'app/assets/stylesheets/application.css'
