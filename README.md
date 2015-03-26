@@ -1,6 +1,6 @@
 ### Prerequisites
 * git
-* ruby 2.1.x (preferably via rbenv or rvm)
+* ruby 2.2.x (preferably via rbenv or rvm)
 * rails 4.2.x
 * postgres
   * should be running
@@ -17,7 +17,7 @@ rails -v # should return Rails 4.2.x ... although this recipe may work for rails
 ruby -v  # should return ruby 2.1.x ... although this recipe may work for ruby 1.9.3 as well
 rails new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
-rvm use 2.1.2
+rvm use 2.2.1
 bundle install
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/vanilla_rails.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/ruby-version-in-gemfile.rb"
@@ -57,7 +57,7 @@ ruby -v  # should return ruby 2.1.x ... although this recipe works for ruby 1.9.
 bundle -v # should return bundler 1.6.x
 rails-api new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
-rvm use 2.1.2
+rvm use 2.2.1
 bundle install
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/vanilla_rails_api.rb"
 # clean up the Gemfile by hand
