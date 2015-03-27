@@ -48,21 +48,23 @@ rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/bootstrap-sass.rb"
 
 Here is a recipe we use when starting a new GetSerene rails-api project:
 ````
-mkdir -p ~/Code/GetSerene/serene
-cd ~/Code/GetSerene/serene
+mkdir -p ~/Code/GetSerene
+cd ~/Code/GetSerene
 git clone https://github.com/GetSerene/rails_application_templates.git # or if you've forked the rails_application_templates repo ... the url of your fork
-export RAILS_TEMPLATES_ROOT=~/Code/GetSerene/serene/rails_application_templates
-rails-api -v # should return Rails 4.2.x ... although this recipe works for rails 3.2.x as well (just be sure to use the strong_paramaters step)
-ruby -v  # should return ruby 2.1.x ... although this recipe works for ruby 1.9.3 as well
-bundle -v # should return bundler 1.6.x
+export RAILS_TEMPLATES_ROOT=~/Code/GetSerene/rails_application_templates
+ruby -v  # should return ruby 2.2.x
+gem list rails-api # should return 0.4.0
+rails-api -v # should return Rails 4.2.x
+bundle -v # should return bundler 1.9.x
 rails-api new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
 rvm use 2.2.1
 bundle install
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/vanilla_rails_api.rb"
+rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/ruby-version-in-gemfile.rb"
 # clean up the Gemfile by hand
 # rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/pry-rails.rb"
-rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/pg.rb"
+rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/pg.rb"  # probably just answer yes to link database.yml and create tables
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/rspec-rails.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/newrelic_rpm.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/timecop.rb"
