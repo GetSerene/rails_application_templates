@@ -53,10 +53,9 @@ cd ~/Code/GetSerene
 git clone https://github.com/GetSerene/rails_application_templates.git # or if you've forked the rails_application_templates repo ... the url of your fork
 export RAILS_TEMPLATES_ROOT=~/Code/GetSerene/rails_application_templates
 ruby -v  # should return ruby 2.2.x
-gem list rails-api # should return 0.4.0
-rails-api -v # should return Rails 4.2.x
+rails -v # should return Rails 4.2.x ... although this recipe may work for rails 3.2.x as well (just be sure to use the strong_paramaters step)
 bundle -v # should return bundler 1.9.x
-rails-api new PROJECTNAME --skip-bundle --database=postgresql --skip-test-unit
+rails new PROJECTNAME --api --skip-bundle --database=postgresql --skip-test-unit
 cd PROJECTNAME
 rvm use 2.2.1
 bundle install
