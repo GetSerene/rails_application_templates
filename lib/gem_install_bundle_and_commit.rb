@@ -12,9 +12,15 @@ def gem_installed?(*args)
 end
 
 def gem_install_bundle_and_commit(*args)
+  gem_install_bundle_and_commit_append(*args) do
+    sort_and_save_gemfile
+  end
+end
+
+def gem_install_bundle_and_commit_append(*args)
   return if gem_installed?(*args)
   gem(*args)
-  sort_and_save_gemfile
+  yield if block_given?
   Bundler.with_clean_env do
     run 'bundle install'
   end

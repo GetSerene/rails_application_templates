@@ -75,11 +75,12 @@ def expand_groups(lines)
   output_lines
 end
 
-def gemfile_sort(lines, keep_first = ['dotenv-rails'])
+def gemfile_sort(lines, keep_first = ['dotenv-rails'], keep_last = ['newrelic_rpm'])
   output_lines = []
   gems_to_sort = []
   new_lines = lines.dup.collect {|line| line =~ /\n$/m ? line : "#{line}\n"}
   stored_context = []
+  gems_at_end = []
   expand_groups(new_lines).each do |line|
     case line
     when /^#/
@@ -87,6 +88,10 @@ def gemfile_sort(lines, keep_first = ['dotenv-rails'])
     when /^gem/
       if keep_first.find_index {|keeper| line.include? keeper}
         output_lines += stored_context + [line]
+        stored_context = []
+        next
+      elsif keep_last.find_index {|keeper| line.include? keeper}
+        gems_at_end += stored_context + [line]
         stored_context = []
         next
       end
@@ -102,6 +107,10 @@ def gemfile_sort(lines, keep_first = ['dotenv-rails'])
   gems_to_sort.sort.uniq.each do |gem_lines|
     sort_key, lines_to_add = gem_lines
     output_lines += lines_to_add
+  end
+  unless gems_at_end.empty?
+    output_lines += ["\n"]
+    output_lines += gems_at_end
   end
   remove_excessive_whitespace output_lines.flatten
 end
