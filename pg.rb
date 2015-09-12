@@ -28,7 +28,7 @@ git rm: "config/database.yml"
 git commit: %Q{ -m 'rm database.yml, create database.default.yml for pg' }
 
 unless IO.read('.gitignore').match /database.yml/
-  append_file '.gitignore', 'config/database.yml'
+  append_file '.gitignore', "config/database.yml\n"
   git add: "."
   git commit: %Q{ -m 'ignore database.yml' }
 end
