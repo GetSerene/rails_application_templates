@@ -34,6 +34,7 @@ rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/pg.rb"      # or use mysql2 
 bin/rails server # you should see the Rails Welcome page ... before you should get ActiveRecord errors because you don't have any dbs
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/mysql2.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/rspec-rails.rb" # /bin/rake should run your specs (0 examples, 0 failures)
+# rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/guard-rails.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/spring-binstubs.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/haml-rails.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/strong_parameters.rb # only needed for rails 3"
