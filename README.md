@@ -35,6 +35,7 @@ bin/rails server # you should see the Rails Welcome page ... before you should g
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/mysql2.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/rspec-rails.rb" # /bin/rake should run your specs (0 examples, 0 failures)
 # rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/guard-rails.rb"
+rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/guard-rspec.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/spring-binstubs.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/haml-rails.rb"
 rake rails:template LOCATION="$RAILS_TEMPLATES_ROOT/strong_parameters.rb # only needed for rails 3"
