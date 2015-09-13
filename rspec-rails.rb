@@ -7,3 +7,4 @@ generate 'rspec:install'
 git add: "."
 git commit: %Q{ -m 'generate rspec:install' }
 
+gem_install_bundle_and_commit 'spring-commands-rspec'
